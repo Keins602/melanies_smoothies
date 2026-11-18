@@ -1,4 +1,5 @@
 # Import python packages
+import requests
 import streamlit as st
 from snowflake.snowpark.functions import col
 
@@ -41,3 +42,7 @@ if ingredients_list:
                 params=[ingredients_string, name_on_order],
             ).collect()
             st.success(f"Your Smoothie is ordered, {name_on_order}!", icon="✅")
+
+# Nutrition info from the SmoothieFroot API
+smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+st.text(smoothiefroot_response)
